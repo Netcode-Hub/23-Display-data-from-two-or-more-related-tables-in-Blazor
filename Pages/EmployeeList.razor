@@ -1,0 +1,35 @@
+﻿@attribute [Authorize]
+@page "/"
+@inherits EmployeeListBase
+<PageTitle>Employee List</PageTitle>
+
+<h1>Employee List</h1>
+
+@if(Employees == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="row">
+    
+        @foreach (var employee in Employees)
+        {<div class="col-md-auto">
+            <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+                <div class="card-header">
+                    <h3>@employee.FirstName @employee.LastName</h3>
+                </div>
+                <img class="card-img-top" src="@employee.PhotoPath" style="height:200px; width:auto;" />
+                <div class="card-footer text-center">
+                    <a href="@($"EmployeeDetails/{employee.EmployeeId}")" class="btn btn-primary m-1"> View </a>
+                    <a href="@($"EditEmployee/{employee.EmployeeId}")" class="btn btn-info m-1"> Edit </a>
+                    <a class="btn btn-danger m-1"> Delete </a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+}
+
+
+

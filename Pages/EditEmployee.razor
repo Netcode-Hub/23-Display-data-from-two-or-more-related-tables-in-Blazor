@@ -1,0 +1,67 @@
+﻿@attribute [Authorize]
+@page "/EditEmployee/{id}"
+@page "/EditEmployee"
+@inherits EditEmployeeBase
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <EditForm Model="@EditEmployeeModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <h3>Edit Employee</h3>
+            <hr />
+            <ValidationSummary />
+            <div class="form-group row mt-3">
+                <lable for="firstname" class="col-sm-2 col-form-label">First Name</lable>
+                <InputText id="firstname" class="form-control" placeholder="First Name" @bind-Value="EditEmployeeModel.FirstName" />
+                <ValidationMessage For="@(() => EditEmployeeModel.FirstName)" />
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="email" class="col-sm-2 col-form-label">Photo Path</lable>
+                <InputText id="photoPath" class="form-control" placeholder="Photo Path" @bind-Value="EditEmployeeModel.PhotoPath" />
+                <ValidationMessage For="@(() => EditEmployeeModel.PhotoPath)" />
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="lastname" class="col-sm-2 col-form-label">Last Name</lable>
+                <InputText id="lastname" class="form-control" placeholder="Last Name" @bind-Value="EditEmployeeModel.LastName" />
+                <ValidationMessage For="@(() => EditEmployeeModel.LastName)" />
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="email" class="col-sm-2 col-form-label">Email</lable>
+                <InputText id="email" class="form-control" placeholder="Email" @bind-Value="EditEmployeeModel.Email" />
+                <ValidationMessage For="@(() => EditEmployeeModel.Email)" />
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="email" class="col-sm-2 col-form-label">Confirm Email</lable>
+                <InputText id="email" class="form-control" placeholder="Email" @bind-Value="EditEmployeeModel.ConfirmEmail" />
+                <ValidationMessage For="@(() => EditEmployeeModel.ConfirmEmail)" />
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="department" class="col-sm-2 col-form-label">Department</lable>
+                <InputSelect id="department" @bind-Value="EditEmployeeModel.DepartmentId" class="form-control">
+                    @foreach (var dept in Departments)
+                    {
+                        <option value="@dept.DepartmentId">@dept.DepartmentName </option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="gender" class="col-sm-2 col-form-label">Gender</lable>
+                <InputSelect id="gender" @bind-Value="EditEmployeeModel.Gender" class="form-control">
+                    @foreach (var gender in Enum.GetValues(typeof(Gender)))
+                    {
+                        <option value="@gender"> @gender </option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="form-group row mt-3">
+                <lable for="date" class="col-sm-2 col-form-label">Date Of Birth</lable>
+                <InputDate id="date" @bind-Value="EditEmployeeModel.DateOfBirth" class="form-control">
+                </InputDate>
+            </div>
+            <div class="form-group row mt-3">
+             <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" @onclick="Delete_Click">Delete</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
